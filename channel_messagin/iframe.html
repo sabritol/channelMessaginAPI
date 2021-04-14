@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="style.css"/>
+    <script>
+        // we listen for the dom content loader
+        window.addEventListener('DOMContentLoaded', () => {
+            //also listen fot the mensaje event on the window objet
+
+            //is gonna be fired when we recive a message from the channel mensaje API
+            window.addEventListener('message', event => {
+                document.querySelector('p').innerHTML = `Message from index.html: ${event.data}`
+                event.ports[0].postMessage('BA')
+
+            })
+
+        })
+    </script>
+    <body>
+        <p></p>
+    </body>
+</head>

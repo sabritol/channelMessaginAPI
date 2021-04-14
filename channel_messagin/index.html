@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <link real="stylesheet" href="style.css">
+    <script>
+        // window.addEventListener make sure we execute the JS when the dom is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            const channel = new MessageChannel()
+            const display = document.querySelector ('p')
+            const iframe = document.querySelector ('iframe')
+
+            iframe.addEventListener('load', () =>{
+                iframe.contentWindow.postMessage('Portal Om', '*', [channel.port2])
+
+            })
+            channel.port1.onmessage = event => {
+                display.innerHTML = `Message back from the iframe: ${event.data}`
+            }
+
+        })
+    </script>
+    <head>
+        <body>
+            <iframe src="iframe.html" width="500" height="100"></iframe>
+            <p></p>
+        </body>
+    </head>
+</html>
